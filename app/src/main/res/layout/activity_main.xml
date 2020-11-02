@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/login_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/password_edit"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="830dp"
-        android:layout_marginBottom="0dp" />
-
+        android:hint="@string/login_edit_hint"
+        android:autofillHints="login"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/password_edit" />
     <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/password_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/login_button"
-        android:layout_marginBottom="0dp" />
-
+        android:hint="@string/password_edit_hint"
+        android:autofillHints="password"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/login_edit"
+        app:layout_constraintBottom_toTopOf="@+id/login_button" />
     <Button
-        android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"/>
-
-</RelativeLayout>
+        android:id="@+id/login_button"
+        android:text="@string/login_button_text"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_edit"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
