@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "79382604924",
+    "firebase_url": "https://lab-manager-48aa8.firebaseio.com",
+    "project_id": "lab-manager-48aa8",
+    "storage_bucket": "lab-manager-48aa8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79382604924:android:8a1fb12bbb453609e9adf9",
+        "android_client_info": {
+          "package_name": "com.example.manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79382604924-4974pvdibnjoakhfepk09rqole5qpcd5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiySgb6spqJ_RvywGfUqpO0TTlg2VRbUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79382604924-4974pvdibnjoakhfepk09rqole5qpcd5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
