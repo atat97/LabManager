@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class GasesListActivity extends AppCompatActivity {
 
         //TODO: Jedno z dwóch:
         // Określona z góry ilość butli (na sztywno wpisane w bazie danych) -> poszczególne TextView dla każdej butli -> pobieranie wartości i zapisywanie nowych do bazy danych
-        //      Jeśli to rozwiązanie to: Jakie gazy? Jakie wartości dla nich? (aktualnie nazwa i wartość (napełnienie) w %)
+        //      Jeśli to rozwiązanie to: Jakie gazy? Jakie wartości dla nich? (aktualnie: nazwa i wartość (napełnienie) w %)
         //      ((AKTUALNIE WPROWADZONE))
         // Swobodne dodawanie nowych butli -> pobieranie butli z bazy danych -> generowanie TextView dla każdej -> aktualizacja bazy - aktualizacja layoutu
         //      Dosyć trudne rozwiązanie ale umożliwia dodawanie butli "w locie"
@@ -58,8 +59,17 @@ public class GasesListActivity extends AppCompatActivity {
         gases_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                textView_NO2.setText(snapshot.child("0").child("name").getValue().toString());
-                textView_NO2_value.setText(snapshot.child("0").child("value").getValue().toString());
+                //Read
+                List<Gas> gasList = new ArrayList<>();
+                for(int i = 0; i < snapshot.getChildrenCount(); i++){
+                    gasList.add(snapshot.child(String.valueOf(i)).getValue(Gas.class));
+                }
+                textView_NO2.setText(gasList.get(0).getName());
+                textView_NO2_value.setText(gasList.get(0).getValue());
+
+                //textView_NO2.setText(snapshot.child("0").child("name").getValue().toString() + ": ");
+                //textView_NO2_value.setText(snapshot.child("0").child("value").getValue().toString());
+
                 //TextView textView = new TextView(getBaseContext());
                 //textView.setText("Name: " + snapshot.child(String.valueOf(0)).child("name").getValue() + " Value: " + snapshot.child(String.valueOf(0)).child("value").getValue());
                 //linearLayout.addView(textView);
@@ -82,7 +92,6 @@ public class GasesListActivity extends AppCompatActivity {
         button_NO2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Odpalić okienko do: wpisania nowego stanu butli/suwak do ustalenia nowego stanu butli w %
                 startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class));
             }
         });

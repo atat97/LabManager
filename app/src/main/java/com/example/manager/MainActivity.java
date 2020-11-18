@@ -32,12 +32,16 @@ public class MainActivity extends AppCompatActivity {
         final EditText passwordEdit = findViewById(R.id.password_edit);
         progressDialog = new ProgressDialog(this);
 
+        //TODO: Logout button
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = mAuth.getInstance().getCurrentUser();
+
+
         if(currentUser != null){
             finish();
             startActivity(new Intent(MainActivity.this, GasesListActivity.class));
         }
+
         
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,7 +34,9 @@ public class ChangeValuePopUp extends Activity {
         getWindow().setLayout((int) (width*0.8),(int) (height*0.4));
 
         SeekBar seekBar = findViewById(R.id.seekBar);
+        //TODO: Set seekerBar starting state to the current gas cylinder state
         TextView textView_seekBar = findViewById(R.id.textView_seekBar);
+        //TODO: Cancel button
         Button button_change_value = findViewById(R.id.button_change_value);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
