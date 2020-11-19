@@ -1,6 +1,7 @@
 package com.example.manager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -19,48 +20,40 @@ public class ChangeValuePopUp extends Activity {
     DatabaseReference reference = database.getReference();
     DatabaseReference gases_ref = reference.child("Gases");
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changevaluepopup);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        Intent intent = getIntent();
+        Gas gas = intent.getParcelableExtra("gas");
+        int id = intent.getIntExtra("id", 0);
 
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
+        TextView textName = findViewById(R.id.popup_name);
+        TextView textValue = findViewById(R.id.popup_value);
+        TextView textUser = findViewById(R.id.popup_user);
+        TextView textLocation = findViewById(R.id.popup_location);
+        TextView textAcqDate = findViewById(R.id.popup_acq_date);
 
-        getWindow().setLayout((int) (width*0.8),(int) (height*0.4));
+        Button buttonUpdate = findViewById(R.id.button_update);
+        Button buttonArchive = findViewById(R.id.button_archive);
 
-        SeekBar seekBar = findViewById(R.id.seekBar);
-        //TODO: Set seekerBar starting state to the current gas cylinder state
-        TextView textView_seekBar = findViewById(R.id.textView_seekBar);
-        //TODO: Cancel button
-        Button button_change_value = findViewById(R.id.button_change_value);
+        textName.setText(gas.getName());
+        textValue.setText(gas.getValue());
+        textUser.setText(gas.getUser());
+        textLocation.setText(gas.getLocation());
+        textAcqDate.setText(gas.getAcq_date());
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView_seekBar.setText("" + progress + "%");
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        button_change_value.setOnClickListener(new View.OnClickListener() {
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Gets child id from previous activity
-                gases_ref.child("0").child("value").setValue(textView_seekBar.getText());
+                gas.setName(textName.getText().toString());
+                gas.setValue(textValue.getText().toString());
+                gas.setUser(textUser.getText().toString());
+                gas.setLocation(textLocation.getText().toString());
+                gas.setAcq_date(textAcqDate.getText().toString());
+                //Crash point Alpha :((((
+                gases_ref.child(String.valueOf(id)).setValue(gas);
                 finish();
             }
         });

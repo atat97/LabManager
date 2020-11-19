@@ -140,8 +140,7 @@ public class GasesListActivity extends AppCompatActivity {
         manageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).put);
+                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).putExtra("gas", gasList.get(i)).putExtra("id", i));
             }
         });
 
