@@ -59,6 +59,8 @@ public class GasesListActivity extends AppCompatActivity {
         ProgressDialog progressDialog = new ProgressDialog(this);
 
 
+
+
         gases_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,16 +96,7 @@ public class GasesListActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        button_NO2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class));
-            }
-        });
 
-
-         */
     }
 
     protected void displayGas(List<Gas> gasList, int i, TableLayout tableLayout){
@@ -139,5 +132,20 @@ public class GasesListActivity extends AppCompatActivity {
         tableLayout.addView(rowAcqDate);
 
         //Fifth row: EDIT BUTTON
+        TableRow rowButton = new TableRow(GasesListActivity.this);
+        Button manageButton = new Button(GasesListActivity.this);
+        manageButton.setText("MANAGE GAS");
+        //manageButton.setTag("manageButton" + gasList.get(i).getName());
+
+        manageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).put);
+            }
+        });
+
+        rowButton.addView(manageButton);
+        tableLayout.addView(rowButton);
     }
 }
