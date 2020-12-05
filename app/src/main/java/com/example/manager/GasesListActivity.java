@@ -43,14 +43,6 @@ public class GasesListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //TODO: Jedno z dwóch:
-        // Określona z góry ilość butli (na sztywno wpisane w bazie danych) -> poszczególne TextView dla każdej butli -> pobieranie wartości i zapisywanie nowych do bazy danych
-        //      Jeśli to rozwiązanie to: Jakie gazy? Jakie wartości dla nich? (aktualnie: nazwa i wartość (napełnienie) w %)
-        //      ((AKTUALNIE WPROWADZONE))
-        // Swobodne dodawanie nowych butli -> pobieranie butli z bazy danych -> generowanie TextView dla każdej -> aktualizacja bazy - aktualizacja layoutu
-        //      Dosyć trudne rozwiązanie ale umożliwia dodawanie butli "w locie"
-        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaseslist);
 
@@ -80,7 +72,8 @@ public class GasesListActivity extends AppCompatActivity {
                 tableLayout.setShrinkAllColumns(true);
                 tableLayout.setStretchAllColumns(true);
 
-
+                gasesLinLayout.removeAllViews();
+                tableLayout.removeAllViews();
 
                 for(int i = 0; i < gasList.size(); i++){
                     displayGas(gasList, i, tableLayout);
@@ -96,6 +89,13 @@ public class GasesListActivity extends AppCompatActivity {
             }
         });
 
+        Button add_button = findViewById(R.id.add_button);
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -140,7 +140,7 @@ public class GasesListActivity extends AppCompatActivity {
         manageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).putExtra("gas", gasList.get(i)).putExtra("id", i));
+                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).putExtra("gas_in", gasList.get(i)).putExtra("id", i));
             }
         });
 
