@@ -113,9 +113,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="Acq date:"
+            android:id="@+id/popup_acq_date_text"
             android:textSize="40sp"
             android:textStyle="bold"/>
-        <EditText
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"

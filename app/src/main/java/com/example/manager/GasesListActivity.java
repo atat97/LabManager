@@ -31,7 +31,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GasesListActivity extends AppCompatActivity {
 
@@ -58,10 +60,27 @@ public class GasesListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 //Read gases from database
-                List<Gas> gasList = new ArrayList<>();
+
+                //List<Gas> gasList = new ArrayList<>();
+                Map<String, Gas> gasMap = new HashMap<String, Gas>();
+
+
+
+                /*
                 for(int i = 0; i < snapshot.getChildrenCount(); i++){
                     gasList.add(snapshot.child(String.valueOf(i)).getValue(Gas.class));
                 }
+                 */
+
+
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    gasMap.put(snap.getKey(),snap.getValue(Gas.class));
+                    //Gas gas = snap.getValue(Gas.class);
+                    //gasList.add(gas);
+                }
+
+
 
                 //Display gases
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -75,8 +94,11 @@ public class GasesListActivity extends AppCompatActivity {
                 gasesLinLayout.removeAllViews();
                 tableLayout.removeAllViews();
 
-                for(int i = 0; i < gasList.size(); i++){
-                    displayGas(gasList, i, tableLayout);
+
+                for(String key : gasMap.keySet()){
+                    String savedKey = key.toString();
+                    Gas gas = gasMap.get(key);
+                    displayGas(gas,savedKey,tableLayout);
                 }
 
                 gasesLinLayout.addView(tableLayout);
@@ -99,35 +121,37 @@ public class GasesListActivity extends AppCompatActivity {
 
     }
 
-    protected void displayGas(List<Gas> gasList, int i, TableLayout tableLayout){
+
+
+    protected void displayGas(Gas gas, String key, TableLayout tableLayout){
         //First row: NAME & VALUE
         TableRow rowNameAndValue = new TableRow(GasesListActivity.this);
         TextView textName = new TextView(GasesListActivity.this);
-        textName.setText(gasList.get(i).getName());
+        textName.setText(gas.getName());
         rowNameAndValue.addView(textName);
         TextView textValue = new TextView(GasesListActivity.this);
-        textValue.setText(gasList.get(i).getValue());
+        textValue.setText(gas.getValue());
         rowNameAndValue.addView(textValue);
         tableLayout.addView(rowNameAndValue);
 
         //Second row: USER
         TableRow rowUser = new TableRow(GasesListActivity.this);
         TextView textUser = new TextView(GasesListActivity.this);
-        textUser.setText(gasList.get(i).getUser());
+        textUser.setText(gas.getUser());
         rowUser.addView(textUser);
         tableLayout.addView(rowUser);
 
         //Third row: LOCATION
         TableRow rowLocation = new TableRow(GasesListActivity.this);
         TextView textLocation = new TextView(GasesListActivity.this);
-        textLocation.setText(gasList.get(i).getLocation());
+        textLocation.setText(gas.getLocation());
         rowLocation.addView(textLocation);
         tableLayout.addView(rowLocation);
 
         //Fourth row: ACQUISITION DATE
         TableRow rowAcqDate = new TableRow(GasesListActivity.this);
         TextView textAcqDate = new TextView(GasesListActivity.this);
-        textAcqDate.setText(gasList.get(i).getAcq_date());
+        textAcqDate.setText(gas.getAcq_date());
         rowAcqDate.addView(textAcqDate);
         tableLayout.addView(rowAcqDate);
 
@@ -135,12 +159,12 @@ public class GasesListActivity extends AppCompatActivity {
         TableRow rowButton = new TableRow(GasesListActivity.this);
         Button manageButton = new Button(GasesListActivity.this);
         manageButton.setText("MANAGE GAS");
-        //manageButton.setTag("manageButton" + gasList.get(i).getName());
+        //manageButton.setTag("manageButton" + gas.getName());
 
         manageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).putExtra("gas_in", gasList.get(i)).putExtra("id", i));
+                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).putExtra("gas_in", gas).putExtra("key", key));
             }
         });
 
