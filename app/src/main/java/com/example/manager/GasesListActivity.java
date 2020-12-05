@@ -93,7 +93,7 @@ public class GasesListActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class));
             }
         });
 
