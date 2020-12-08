@@ -2,13 +2,11 @@ package com.example.manager;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +23,7 @@ import java.util.Locale;
 
 public class ChangeValuePopUp extends Activity {
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference reference = database.getReference();
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference gases_ref = reference.child("Gases");
 
     Gas gas_in = new Gas();
@@ -58,7 +55,7 @@ public class ChangeValuePopUp extends Activity {
             textLocation.setText(gas_in.getLocation());
             textAcqDate.setText(gas_in.getAcq_date());
         }else{
-            buttonUpdate.setText(R.string.managepopup_add_button);
+            buttonUpdate.setText(R.string.manage_popup_add_button);
             ViewGroup layout = (ViewGroup) buttonArchive.getParent();
             layout.removeView(buttonArchive);
             layout = (ViewGroup) textAcqDate.getParent();
@@ -69,18 +66,7 @@ public class ChangeValuePopUp extends Activity {
 
 
         buttonArchive.setOnClickListener(v -> {
-            //TODO: Check for empty strings
-            Gas gas_out = new Gas(
-                    textName.getText().toString(),
-                    textValue.getText().toString(),
-                    textUser.getText().toString(),
-                    textLocation.getText().toString(),
-                    gas_in.getAcq_date(),
-                    new SimpleDateFormat("dd.MM.yyyy",Locale.getDefault()).format(new Date())
-            );
-            gases_ref.child(key).removeValue();
-            reference.child("Archive").push().setValue(gas_out);
-            finish();
+            archiveGas(textName, textValue, textUser, textLocation);
         });
 
         buttonUpdate.setOnClickListener(v -> {
@@ -114,6 +100,21 @@ public class ChangeValuePopUp extends Activity {
         });
 
 
+    }
+
+    private void archiveGas(EditText textName, EditText textValue, EditText textUser, EditText textLocation) {
+        //TODO: Check for empty strings
+        Gas gas_out = new Gas(
+                textName.getText().toString(),
+                textValue.getText().toString(),
+                textUser.getText().toString(),
+                textLocation.getText().toString(),
+                gas_in.getAcq_date(),
+                new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date())
+        );
+        gases_ref.child(key).removeValue();
+        reference.child("Archive").push().setValue(gas_out);
+        finish();
     }
 
     private void displayAddGasLayout(){

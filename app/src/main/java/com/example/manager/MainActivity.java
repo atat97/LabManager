@@ -1,19 +1,14 @@
 package com.example.manager;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -43,18 +38,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String login = loginEdit.getText().toString().trim();
-                String password = passwordEdit.getText().toString().trim();
-                if(login.equals("") | password.equals("")){
-                    Toast.makeText(MainActivity.this, "Please enter login and password!", Toast.LENGTH_SHORT).show();
-                }else{
-                    validateUser(login, password);
-                }
-
+        loginButton.setOnClickListener(v -> {
+            String login = loginEdit.getText().toString().trim();
+            String password = passwordEdit.getText().toString().trim();
+            if(login.equals("") | password.equals("")){
+                Toast.makeText(MainActivity.this, "Please enter login and password!", Toast.LENGTH_SHORT).show();
+            }else{
+                validateUser(login, password);
             }
+
         });
         
 
@@ -63,17 +55,14 @@ public class MainActivity extends AppCompatActivity {
     private void validateUser (String username, String password){
         progressDialog.setMessage("Validating...");
         progressDialog.show();
-        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    progressDialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, GasesListActivity.class));
-                }else{
-                    progressDialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
-                }
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                progressDialog.dismiss();
+                Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, GasesListActivity.class));
+            }else{
+                progressDialog.dismiss();
+                Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
             }
         });
     }
