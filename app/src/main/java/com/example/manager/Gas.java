@@ -13,9 +13,10 @@ public class Gas implements Parcelable {
 
     public Gas(){}
 
-    public Gas(String name, String amount, String location, String acq_date, String ret_date) {
+    public Gas(String name, String value, String user, String location, String acq_date, String ret_date) {
         this.name = name;
-        this.value = amount;
+        this.value = value;
+        this.user = user;
         this.location = location;
         this.acq_date = acq_date;
         this.ret_date = ret_date;

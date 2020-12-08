@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/gases_list_scrollview"
         android:layout_above="@+id/add_button"
         android:layout_alignParentTop="true">
 
@@ -26,7 +27,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/logout_button"
         android:text="Add" />
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_alignParentBottom="true"
+        android:text="Logout" />
+
 
 </RelativeLayout>

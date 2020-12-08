@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO: Logout button
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
         if(currentUser != null){
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }

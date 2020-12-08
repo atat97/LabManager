@@ -2,16 +2,11 @@ package com.example.manager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.ContactsContract;
-import android.util.DisplayMetrics;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -64,7 +58,7 @@ public class ChangeValuePopUp extends Activity {
             textLocation.setText(gas_in.getLocation());
             textAcqDate.setText(gas_in.getAcq_date());
         }else{
-            buttonUpdate.setText("Add");
+            buttonUpdate.setText(R.string.managepopup_add_button);
             ViewGroup layout = (ViewGroup) buttonArchive.getParent();
             layout.removeView(buttonArchive);
             layout = (ViewGroup) textAcqDate.getParent();
@@ -74,48 +68,68 @@ public class ChangeValuePopUp extends Activity {
         }
 
 
+        buttonArchive.setOnClickListener(v -> {
+            //TODO: Check for empty strings
+            Gas gas_out = new Gas(
+                    textName.getText().toString(),
+                    textValue.getText().toString(),
+                    textUser.getText().toString(),
+                    textLocation.getText().toString(),
+                    gas_in.getAcq_date(),
+                    new SimpleDateFormat("dd.MM.yyyy",Locale.getDefault()).format(new Date())
+            );
+            gases_ref.child(key).removeValue();
+            reference.child("Archive").push().setValue(gas_out);
+            finish();
+        });
 
-
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: Check for empty strings
-                Gas gas_out = new Gas();
-                gas_out.setName(textName.getText().toString());
-                gas_out.setValue(textValue.getText().toString());
-                gas_out.setUser(textUser.getText().toString());
-                gas_out.setLocation(textLocation.getText().toString());
-
-
-
-                gases_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //Gas already in the database
-                        if(snapshot.hasChild(key)){
-                            gas_out.setAcq_date(gas_in.getAcq_date());
-                            gases_ref.child(key).setValue(gas_out);
-                        }else{
-                            gas_out.setAcq_date(new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date()));
-                            gases_ref.push().setValue(gas_out);
-                        }
-                        finish();
-
+        buttonUpdate.setOnClickListener(v -> {
+            //TODO: Check for empty strings
+            Gas gas_out = new Gas(
+                    textName.getText().toString(),
+                    textValue.getText().toString(),
+                    textUser.getText().toString(),
+                    textLocation.getText().toString(),
+                    "",
+                    ""
+            );
+            gases_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    //Gas already in the database
+                    if(snapshot.hasChild(key)){
+                        gas_out.setAcq_date(gas_in.getAcq_date());
+                        gases_ref.child(key).setValue(gas_out);
+                    }else{
+                        gas_out.setAcq_date(new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date()));
+                        gases_ref.push().setValue(gas_out);
                     }
+                    finish();
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-                //gases_ref.push().setValue(gas_out);
-                //finish();
-
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
         });
 
 
     }
+
+    private void displayAddGasLayout(){
+
+    }
+
+    private void displayEditGasLayout(){
+
+    }
+
+    private void addGas(){
+
+    }
+
+    private void editGas(){
+
+    }
+
 }
