@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         final EditText passwordEdit = findViewById(R.id.password_edit);
         progressDialog = new ProgressDialog(this);
 
-        //TODO: Logout button
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 

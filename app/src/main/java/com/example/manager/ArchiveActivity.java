@@ -1,6 +1,6 @@
 package com.example.manager;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -54,7 +54,7 @@ public class ArchiveActivity extends AppCompatActivity {
                 //Display gases
                 for(String key : gasMap.keySet()){
                     Gas gas = gasMap.get(key);
-                    displayGas(gas, key, tableLayout);
+                    displayGas(gas, tableLayout);
                 }
                 //Add the table layout to the view
                 archiveLinLayout.addView(tableLayout);
@@ -74,7 +74,8 @@ public class ArchiveActivity extends AppCompatActivity {
 
 
 
-    private void displayGas(Gas gas, String key, TableLayout tableLayout){
+    @SuppressLint("SetTextI18n")
+    private void displayGas(Gas gas, TableLayout tableLayout){
         //First row: NAME & VALUE
         TableRow rowName = new TableRow(ArchiveActivity.this);
         TextView textName = new TextView(ArchiveActivity.this);

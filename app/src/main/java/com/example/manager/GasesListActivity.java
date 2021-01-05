@@ -1,11 +1,9 @@
 package com.example.manager;
 
-import android.app.ActionBar;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -82,6 +79,7 @@ public class GasesListActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("SetTextI18n")
     private void displayGas(Gas gas, String key, TableLayout tableLayout){
         //First row: NAME & VALUE
         TableRow rowName = new TableRow(GasesListActivity.this);

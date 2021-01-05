@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,33 +108,41 @@ public class ChangeValuePopUp extends Activity {
         });
 
         buttonUpdate.setOnClickListener(v -> {
-            //TODO: Check for empty strings
-            Gas gas_out = new Gas(
-                    textName.getText().toString(),
-                    textValue.getText().toString(),
-                    textUser.getText().toString(),
-                    textLocation.getText().toString(),
-                    "",
-                    ""
-            );
-            inUse_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    //Gas already in the database
-                    if(snapshot.hasChild(key)){
-                        gas_out.setAcq_date(gas_in.getAcq_date());
-                        inUse_ref.child(key).setValue(gas_out);
-                    }else{
-                        gas_out.setAcq_date(new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date()));
-                        inUse_ref.push().setValue(gas_out);
+            //Check for empty strings
+            if(textName.getText().toString().equals("") ||
+                    textValue.getText().toString().equals("") ||
+                    textUser.getText().toString().equals("") ||
+                    textLocation.getText().toString().equals("") ||
+                    textAcqDate.getText().toString().equals("")){
+                Toast.makeText(this, "Wprowadź wszystkie dane!", Toast.LENGTH_SHORT).show();
+            }else {
+                Gas gas_out = new Gas(
+                        textName.getText().toString(),
+                        textValue.getText().toString(),
+                        textUser.getText().toString(),
+                        textLocation.getText().toString(),
+                        "",
+                        ""
+                );
+                inUse_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //Gas already in the database
+                        if (snapshot.hasChild(key)) {
+                            gas_out.setAcq_date(gas_in.getAcq_date());
+                            inUse_ref.child(key).setValue(gas_out);
+                        } else {
+                            gas_out.setAcq_date(new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date()));
+                            inUse_ref.push().setValue(gas_out);
+                        }
+                        finish();
                     }
-                    finish();
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
         });
 
 

@@ -15,11 +15,7 @@ public class MenuActivity extends AppCompatActivity {
         Button inUseButton = findViewById(R.id.inUse_button);
         Button archiveButton = findViewById(R.id.archive_button);
 
-        inUseButton.setOnClickListener(v -> {
-            startActivity(new Intent(MenuActivity.this, GasesListActivity.class));
-        });
-        archiveButton.setOnClickListener(v -> {
-            startActivity(new Intent(MenuActivity.this, ArchiveActivity.class));
-        });
+        inUseButton.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, GasesListActivity.class)));
+        archiveButton.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, ArchiveActivity.class)));
     }
 }

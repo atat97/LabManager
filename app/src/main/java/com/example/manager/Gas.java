@@ -71,24 +71,8 @@ public class Gas implements Parcelable {
         this.name = name;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
     public void setAcq_date(String acq_date) {
         this.acq_date = acq_date;
-    }
-
-    public void setRet_date(String ret_date) {
-        this.ret_date = ret_date;
     }
 
     @Override

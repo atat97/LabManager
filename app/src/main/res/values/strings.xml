@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">LabManager</string>
     <string name="login_edit_hint">E-Mail</string>
-    <string name="password_edit_hint">Password</string>
+    <string name="password_edit_hint">Hasło</string>
     <string name="login_button_text">Login</string>
-    <string name="manage_gas_button">EXPAND</string>
-    <string name="manage_popup_add_button">Add</string>
+    <string name="manage_gas_button">Zarządzaj</string>
+    <string name="manage_popup_add_button">Dodaj</string>
+    <string name="logout_button">Wyloguj</string>
+    <string name="archive_button">Zarchiwizuj</string>
+    <string name="acq_date">Data dodania</string>
+    <string name="location">Lokalizacja</string>
+    <string name="user">Użytkownik</string>
+    <string name="value">Wartość</string>
+    <string name="name">Nazwa</string>
+    <string name="inUse">W użyciu</string>
+    <string name="archive">Zarchiwizowane</string>
 </resources>

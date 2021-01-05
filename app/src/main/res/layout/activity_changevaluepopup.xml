@@ -12,7 +12,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Name:"
+            android:text="@string/name"
             android:textSize="30sp"
             android:textStyle="bold"/>
         <EditText
@@ -25,7 +25,7 @@
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:hint="Name"
+            android:hint="@string/name"
             android:textAlignment="textEnd"
             android:gravity="end" />
     </TableRow>
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Value:"
+            android:text="@string/value"
             android:textSize="30sp"
             android:textStyle="bold"/>
         <EditText
@@ -50,7 +50,7 @@
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:hint="Value"
+            android:hint="@string/value"
             android:textAlignment="textEnd"
             android:gravity="end" />
     </TableRow>
@@ -62,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="User:"
+            android:text="@string/user"
             android:textSize="30sp"
             android:textStyle="bold"/>
         <EditText
@@ -75,7 +75,7 @@
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:hint="User"
+            android:hint="@string/user"
             android:textAlignment="textEnd"
             android:gravity="end" />
     </TableRow>
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="Location:"
+            android:text="@string/location"
             android:textSize="30sp"
             android:textStyle="bold"/>
         <EditText
@@ -100,7 +100,7 @@
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:hint="Location"
+            android:hint="@string/location"
             android:textAlignment="textEnd"
             android:gravity="end" />
     </TableRow>
@@ -112,7 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="Acq date:"
+            android:text="@string/acq_date"
             android:id="@+id/popup_acq_date_text"
             android:textSize="30sp"
             android:textStyle="bold"/>
@@ -126,7 +126,7 @@
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="date"
-            android:hint="Acq date"
+            android:hint="@string/acq_date"
             android:textAlignment="textEnd"
             android:gravity="end" />
     </TableRow>
@@ -138,7 +138,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ADD"
+            android:text="@string/manage_popup_add_button"
             android:id="@+id/button_update"
             android:textSize="30sp"
             android:textStyle="bold"/>
@@ -151,7 +151,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ARCHIVE"
+            android:text="@string/archive_button"
             android:id="@+id/button_archive"
             android:textSize="30sp"
             android:textStyle="bold"/>
