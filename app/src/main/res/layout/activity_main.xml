@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,8 +14,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/password_edit" />
+        android:layout_centerVertical="true"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,8 +24,8 @@
         android:textAlignment="center"
         android:gravity="center"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/login_edit"
-        app:layout_constraintBottom_toTopOf="@+id/login_button" />
+        android:layout_below="@id/login_edit"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +33,6 @@
         android:text="@string/login_button_text"
         android:textAlignment="center"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_edit"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerVertical="true"
+        android:layout_below="@id/password_edit"/>
+</RelativeLayout>

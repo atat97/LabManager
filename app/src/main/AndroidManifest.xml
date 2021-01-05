@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Manager">
+        <activity android:name=".ArchiveActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".GasesListActivity" />
         <activity android:name=".ChangeValuePopUp" />
         <activity android:name=".MainActivity">

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(currentUser != null){
             finish();
-            startActivity(new Intent(MainActivity.this, GasesListActivity.class));
+            startActivity(new Intent(MainActivity.this, MenuActivity.class));
         }
 
         
@@ -46,10 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 validateUser(login, password);
             }
-
         });
-        
-
     }
     
     private void validateUser (String username, String password){
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             if(task.isSuccessful()){
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, GasesListActivity.class));
+                startActivity(new Intent(MainActivity.this, MenuActivity.class));
             }else{
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();

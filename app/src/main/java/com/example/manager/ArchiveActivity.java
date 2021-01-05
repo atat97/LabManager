@@ -1,11 +1,8 @@
 package com.example.manager;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,28 +24,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GasesListActivity extends AppCompatActivity {
+public class ArchiveActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference();
-    DatabaseReference inUse_ref = reference.child("InUse");
-
+    DatabaseReference archive_ref = reference.child("Archive");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gaseslist);
+        setContentView(R.layout.activity_archive);
 
-        LinearLayout gasesLinLayout = findViewById(R.id.gases_linear_layout);
+        LinearLayout archiveLinLayout = findViewById(R.id.archive_linear_layout);
         TableLayout tableLayout = new TableLayout(this);
         tableLayout.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         tableLayout.setShrinkAllColumns(true);
         tableLayout.setStretchAllColumns(true);
 
-        inUse_ref.addValueEventListener(new ValueEventListener() {
+        archive_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Clear the view
-                gasesLinLayout.removeAllViews();
+                archiveLinLayout.removeAllViews();
                 tableLayout.removeAllViews();
                 //Read gases from database
                 Map<String, Gas> gasMap = new HashMap<>();
@@ -59,19 +54,16 @@ public class GasesListActivity extends AppCompatActivity {
                 //Display gases
                 for(String key : gasMap.keySet()){
                     Gas gas = gasMap.get(key);
-                    displayGas(gas, key,tableLayout);
+                    displayGas(gas, key, tableLayout);
                 }
                 //Add the table layout to the view
-                gasesLinLayout.addView(tableLayout);
+                archiveLinLayout.addView(tableLayout);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(GasesListActivity.this, "Failed to read from database.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ArchiveActivity.this, "Failed to read from database.", Toast.LENGTH_SHORT).show();
             }
         });
-
-        Button add_button = findViewById(R.id.add_button);
-        add_button.setOnClickListener(v -> startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class)));
 
         Button logout_button = findViewById(R.id.logout_button);
         logout_button.setOnClickListener(v -> {
@@ -84,52 +76,57 @@ public class GasesListActivity extends AppCompatActivity {
 
     private void displayGas(Gas gas, String key, TableLayout tableLayout){
         //First row: NAME & VALUE
-        TableRow rowName = new TableRow(GasesListActivity.this);
-        TextView textName = new TextView(GasesListActivity.this);
+        TableRow rowName = new TableRow(ArchiveActivity.this);
+        TextView textName = new TextView(ArchiveActivity.this);
         textName.setText("Nazwa - " + gas.getName());
         textName.setGravity(Gravity.CENTER);
         rowName.addView(textName);
         tableLayout.addView(rowName);
 
         //Second row: VALUE
-        TableRow rowValue = new TableRow(GasesListActivity.this);
-        TextView textValue = new TextView(GasesListActivity.this);
+        TableRow rowValue = new TableRow(ArchiveActivity.this);
+        TextView textValue = new TextView(ArchiveActivity.this);
         textValue.setText("Wartość - " + gas.getValue());
         textValue.setGravity(Gravity.CENTER);
         rowValue.addView(textValue);
         tableLayout.addView(rowValue);
 
         //Third row: USER
-        TableRow rowUser = new TableRow(GasesListActivity.this);
-        TextView textUser = new TextView(GasesListActivity.this);
+        TableRow rowUser = new TableRow(ArchiveActivity.this);
+        TextView textUser = new TextView(ArchiveActivity.this);
         textUser.setText("Użytkownik - " + gas.getUser());
         textUser.setGravity(Gravity.CENTER);
         rowUser.addView(textUser);
         tableLayout.addView(rowUser);
 
         //Fourth row: LOCATION
-        TableRow rowLocation = new TableRow(GasesListActivity.this);
-        TextView textLocation = new TextView(GasesListActivity.this);
-        textLocation.setText("Lokalizacja - " + gas.getLocation());
+        TableRow rowLocation = new TableRow(ArchiveActivity.this);
+        TextView textLocation = new TextView(ArchiveActivity.this);
+        textLocation.setText("Lokacja - " + gas.getLocation());
         textLocation.setGravity(Gravity.CENTER);
         rowLocation.addView(textLocation);
         tableLayout.addView(rowLocation);
 
         //Fifth row: ACQUISITION DATE
-        TableRow rowAcqDate = new TableRow(GasesListActivity.this);
-        TextView textAcqDate = new TextView(GasesListActivity.this);
+        TableRow rowAcqDate = new TableRow(ArchiveActivity.this);
+        TextView textAcqDate = new TextView(ArchiveActivity.this);
         textAcqDate.setText("Data dodania - " + gas.getAcq_date());
         textAcqDate.setGravity(Gravity.CENTER);
         rowAcqDate.addView(textAcqDate);
         tableLayout.addView(rowAcqDate);
 
-        //Sixth row: EDIT BUTTON
-        TableRow rowButton = new TableRow(GasesListActivity.this);
-        Button manageButton = new Button(GasesListActivity.this);
-        manageButton.setText(R.string.manage_gas_button);
+        //Sixth row: ARCHIVE DATE
+        TableRow rowRetDate = new TableRow(ArchiveActivity.this);
+        TextView textRetDate = new TextView(ArchiveActivity.this);
+        textRetDate.setText("Data oddania - " + gas.getRet_date());
+        textRetDate.setGravity(Gravity.CENTER);
+        rowRetDate.addView(textRetDate);
+        tableLayout.addView(rowRetDate);
 
-        manageButton.setOnClickListener(v ->
-                startActivity(new Intent(GasesListActivity.this, ChangeValuePopUp.class).putExtra("gas_in", gas).putExtra("key", key)));
+        //Seventh row: SEPARATOR
+        TableRow rowButton = new TableRow(ArchiveActivity.this);
+        Button manageButton = new Button(ArchiveActivity.this);
+        manageButton.setText("");
         rowButton.addView(manageButton);
         tableLayout.addView(rowButton);
     }
