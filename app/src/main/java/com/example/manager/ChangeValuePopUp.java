@@ -1,6 +1,5 @@
 package com.example.manager;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class ChangeValuePopUp extends Activity {
+public class ChangeValuePopUp extends AppCompatActivity {
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference inUse_ref = reference.child("InUse");
@@ -40,13 +40,13 @@ public class ChangeValuePopUp extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changevaluepopup);
+        getSupportActionBar().hide();
 
         TextView textName = findViewById(R.id.popup_name);
         TextView textValue = findViewById(R.id.popup_value);
         TextView textUser = findViewById(R.id.popup_user);
         TextView textLocation = findViewById(R.id.popup_location);
         TextView textAcqDate = findViewById(R.id.popup_acq_date);
-        //TextView textAcqDateName = findViewById(R.id.popup_acq_date_text);
 
         Button buttonUpdate = findViewById(R.id.button_update);
         Button buttonArchive = findViewById(R.id.button_archive);
@@ -77,6 +77,7 @@ public class ChangeValuePopUp extends Activity {
             ViewGroup layout = (ViewGroup) buttonUpdate.getParent();
             layout.removeView(buttonUpdate);
 
+            //EDITING DISABLED
             textName.setFocusable(false);
             textName.setClickable(false);
             textValue.setFocusable(false);
@@ -101,9 +102,14 @@ public class ChangeValuePopUp extends Activity {
                 user_email = user.getEmail();
             }
             if(user_email.equals(mod_mail) || user_email.equals(admin_mail)){
-                archiveGas(textName, textValue, textUser, textLocation);
+                Intent intentResult = new Intent(ChangeValuePopUp.this, retDateActivity.class);
+                Gas gas_out = readValues(textName, textValue, textUser, textLocation);
+                startActivityForResult(intentResult.putExtra("gas_out", gas_out), 1);
+
+
+                //archiveGas(textName, textValue, textUser, textLocation);
             }else{
-                Toast.makeText(this, "You lack permissions to do this!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Brak ci uprawnień do wykonania tej akcji!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -140,6 +146,7 @@ public class ChangeValuePopUp extends Activity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(ChangeValuePopUp.this, "Nie udało się odczytać bazy danych.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -148,9 +155,21 @@ public class ChangeValuePopUp extends Activity {
 
     }
 
-    private void archiveGas(TextView textName, TextView textValue, TextView textUser, TextView textLocation) {
-        //TODO: Check for empty strings
-        Gas gas_out = new Gas(
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                Gas gas_out = data.getParcelableExtra("gas_out");
+                inUse_ref.child(key).removeValue();
+                reference.child("Archive").push().setValue(gas_out);
+                finish();
+            }
+        }
+    }
+
+    private Gas readValues (TextView textName, TextView textValue, TextView textUser, TextView textLocation){
+        return new Gas(
                 textName.getText().toString(),
                 textValue.getText().toString(),
                 textUser.getText().toString(),
@@ -158,8 +177,5 @@ public class ChangeValuePopUp extends Activity {
                 gas_in.getAcq_date(),
                 new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date())
         );
-        inUse_ref.child(key).removeValue();
-        reference.child("Archive").push().setValue(gas_out);
-        finish();
     }
 }

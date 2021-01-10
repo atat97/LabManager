@@ -13,7 +13,8 @@
         android:textAlignment="center"
         android:gravity="center"
         android:inputType="text"
-        android:layout_centerVertical="true"/>
+        android:layout_above="@+id/password_edit"
+        />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:inputType="textPassword"
-        android:layout_below="@id/login_edit"
+        android:layout_centerVertical="true"
         />
     <Button
         android:layout_width="match_parent"

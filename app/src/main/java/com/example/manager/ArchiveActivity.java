@@ -33,6 +33,7 @@ public class ArchiveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
+        getSupportActionBar().hide();
 
         LinearLayout archiveLinLayout = findViewById(R.id.archive_linear_layout);
         TableLayout tableLayout = new TableLayout(this);
@@ -61,7 +62,7 @@ public class ArchiveActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ArchiveActivity.this, "Failed to read from database.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ArchiveActivity.this, "Nie udało się odczytać bazy danych.", Toast.LENGTH_SHORT).show();
             }
         });
 

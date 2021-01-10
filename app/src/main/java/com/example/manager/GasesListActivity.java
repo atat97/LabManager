@@ -35,12 +35,14 @@ public class GasesListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaseslist);
+        getSupportActionBar().hide();
 
         LinearLayout gasesLinLayout = findViewById(R.id.gases_linear_layout);
         TableLayout tableLayout = new TableLayout(this);
         tableLayout.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         tableLayout.setShrinkAllColumns(true);
         tableLayout.setStretchAllColumns(true);
+
 
         inUse_ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,7 +65,7 @@ public class GasesListActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(GasesListActivity.this, "Failed to read from database.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GasesListActivity.this, "Nie udało się odczytać bazy danych.", Toast.LENGTH_SHORT).show();
             }
         });
 

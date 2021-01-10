@@ -75,6 +75,8 @@ public class Gas implements Parcelable {
         this.acq_date = acq_date;
     }
 
+    public void setRet_date(String ret_date) { this.ret_date = ret_date; }
+
     @Override
     public int describeContents() {
         return 0;

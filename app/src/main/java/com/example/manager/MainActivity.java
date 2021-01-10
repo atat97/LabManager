@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             String login = loginEdit.getText().toString().trim();
             String password = passwordEdit.getText().toString().trim();
             if(login.equals("") | password.equals("")){
-                Toast.makeText(MainActivity.this, "Please enter login and password!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Wprowadź login i hasło!", Toast.LENGTH_SHORT).show();
             }else{
                 validateUser(login, password);
             }
@@ -49,16 +49,16 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void validateUser (String username, String password){
-        progressDialog.setMessage("Validating...");
+        progressDialog.setMessage("Weryfikacja...");
         progressDialog.show();
         mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Logowanie udane!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, MenuActivity.class));
             }else{
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Logowanie nieudane!", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="@string/name"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="0dp"
@@ -21,7 +21,7 @@
             android:layout_weight="0.7"
             android:text=""
             android:id="@+id/popup_name"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="@string/value"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="0dp"
@@ -46,7 +46,7 @@
             android:layout_weight="0.7"
             android:text=""
             android:id="@+id/popup_value"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="@string/user"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="0dp"
@@ -71,7 +71,7 @@
             android:layout_weight="0.7"
             android:text=""
             android:id="@+id/popup_user"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:text="@string/location"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="0dp"
@@ -96,7 +96,7 @@
             android:layout_weight="0.6"
             android:text=""
             android:id="@+id/popup_location"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -114,7 +114,7 @@
             android:layout_weight="0.4"
             android:text="@string/acq_date"
             android:id="@+id/popup_acq_date_text"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="0dp"
@@ -122,7 +122,7 @@
             android:layout_weight="0.6"
             android:text=""
             android:id="@+id/popup_acq_date"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:importantForAutofill="no"
             android:inputType="date"
@@ -140,7 +140,7 @@
             android:layout_weight="1"
             android:text="@string/manage_popup_add_button"
             android:id="@+id/button_update"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
     </TableRow>
     <TableRow
@@ -153,7 +153,7 @@
             android:layout_weight="1"
             android:text="@string/archive_button"
             android:id="@+id/button_archive"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
     </TableRow>
 
